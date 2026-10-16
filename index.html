@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05060a">
+<title>FebzTzy — All Tools & Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="default" class="anim-smooth" data-anim="smooth">
+
+<!-- ===== SPLASH ===== -->
+<div id="splash">
+  <div class="splash-logo" id="splashLogo">FebzTzy</div>
+  <div class="splash-ring-wrap"><div class="splash-ring"></div><div class="splash-ring2"></div></div>
+  <div class="splash-loadbar"><div class="splash-loadfill" id="splashBarFill"></div></div>
+  <div class="splash-pct" id="splashPct">0%</div>
+  <div class="splash-sub" id="splashSub">Menyiapkan tools…</div>
+  <div class="splash-credit">FebzTzy • v1.0<br><span>dibuat oleh FebzTzy</span></div>
+</div>
+
+<!-- ===== TOPBAR ===== -->
+<div class="topbar" id="topbar">
+  <div class="topbar-left">
+    <div class="coin-badge" id="coinBadge">
+      <span class="coin-ico">🪙</span>
+      <span class="coin-val" id="coinVal">0</span>
+    </div>
+    <button class="checkin-btn" id="checkinBtn" type="button">
+      <span class="ci-ico">🎁</span>
+      <span class="ci-txt" id="checkinTxt">CHECK IN</span>
+    </button>
+  </div>
+  <div class="topbar-right">
+    <button class="tb-btn redeem-btn" id="redeemBtn" type="button">🎟️ <span>REDEEM</span></button>
+    <button class="tb-btn wa-btn" id="waBtn" type="button">💬 <span>OWNER</span></button>
+  </div>
+</div>
+
+<!-- ===== HEADER / HUB ===== -->
+<header>
+  <div class="clock-bar" id="clockBar">
+    <div class="clock-seg"><span class="clock-label">JAM</span><span class="clock-val" id="clockTime">--:--:--</span></div>
+    <span class="clock-sep">•</span>
+    <div class="clock-seg"><span class="clock-label">HARI</span><span class="clock-val" id="clockDay">-</span></div>
+    <span class="clock-sep">•</span>
+    <div class="clock-seg"><span class="clock-label">TANGGAL</span><span class="clock-val" id="clockDate">-</span></div>
+    <span class="clock-sep">•</span>
+    <div class="clock-seg"><span class="clock-label">TAHUN</span><span class="clock-val" id="clockYear">-</span></div>
+  </div>
+
+  <div class="banner-wrapper" id="bannerWrapper">
+    <video id="bannerVideo" autoplay muted loop playsinline preload="auto">
+      <source src="https://files.catbox.moe/vl3v6s.mp4" type="video/mp4">
+    </video>
+    <div class="banner-play-hint">▶</div>
+    <div class="banner-overlay">
+      <div class="banner-text">🛠 FebzTzy — Tools & Game</div>
+      <div class="banner-sub">Powered by FebzTzy</div>
+    </div>
+  </div>
+
+  <div class="logo">FebzTzy<span>.</span></div>
+  <p class="tagline">Tools serbaguna — generator, utilitas, dan game.</p>
+  <div class="owner-badge"><i></i> Owner: FebzTzy</div>
+  <div class="pulse"><i></i> sistem online</div>
+
+  <div class="menu-buttons">
+    <button class="tools-toggle" id="toolsToggle" type="button"><span>TOOLS</span><i class="chev">▾</i></button>
+    <button class="tools-toggle cracker-toggle" id="crackerToggle" type="button"><span>CRACKER</span><i class="chev">▾</i></button>
+    <button class="tools-toggle webtool-toggle" id="webtoolToggle" type="button"><span>WEB TO FILE</span><i class="chev">▾</i></button>
+    <button class="tools-toggle maker-toggle" id="makerToggle" type="button"><span>MAKER</span><i class="chev">▾</i></button>
+    <button class="tools-toggle amprem-toggle" id="ampremToggle" type="button"><span>CREATE AM PREM</span><i class="chev">▾</i></button>
+  </div>
+</header>
+
+<!-- ===== DROPDOWN MENUS ===== -->
+<div class="tools-menu" id="toolsMenu"><div class="tools-menu-inner" id="toolsMenuInner"></div></div>
+<div class="tools-menu" id="crackerMenu"><div class="tools-menu-inner" id="crackerMenuInner"></div></div>
+<div class="tools-menu" id="webtoolMenu"><div class="tools-menu-inner" id="webtoolMenuInner"></div></div>
+<div class="tools-menu" id="makerMenu"><div class="tools-menu-inner" id="makerMenuInner"></div></div>
+<div class="tools-menu" id="ampremMenu"><div class="tools-menu-inner" id="ampremMenuInner"></div></div>
+
+<footer>FebzTzy · by <b>FebzTzy</b></footer>
+
+<!-- ===== MODAL TOOL ===== -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="close" onclick="closeModal()">×</button>
+    <h2 id="mTitle">Tool</h2>
+    <p class="sub" id="mSub">Isi parameter di bawah</p>
+    <div class="owner-tag">created by <b>FebzTzy</b></div>
+    <div class="cost-tag" id="mCost">🪙 1 coin</div>
+    <form id="mForm" onsubmit="return false;"><div id="mFields"></div></form>
+    <div class="loader" id="mLoader"><div class="spinner"></div><span>memproses…</span></div>
+    <div class="result" id="mResult"></div>
+    <div class="btn-row" id="mActions">
+      <button class="btn btn-ghost" onclick="closeModal()">Tutup</button>
+      <button class="btn btn-primary" id="mExec" onclick="executeTool()">Eksekusi</button>
+      <button class="btn btn-dl" id="mDl" style="display:none" onclick="downloadResult()">Download</button>
+    </div>
+    <div class="btn-row" id="mExtra" style="display:none"></div>
+  </div>
+</div>
+
+<!-- ===== MODAL REDEEM ===== -->
+<div class="overlay" id="redeemOverlay">
+  <div class="modal modal-sm">
+    <button class="close" onclick="closeRedeem()">×</button>
+    <h2>🎟️ Redeem Code</h2>
+    <p class="sub">Masukkan kode dari owner untuk dapat coin.</p>
+    <div class="field"><label>Kode Redeem</label><input type="text" id="redeemInput" placeholder="contoh: FEBZ-XXXX-XXXX" autocomplete="off"></div>
+    <div class="result" id="redeemResult"></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="closeRedeem()">Tutup</button>
+      <button class="btn btn-primary" id="redeemSubmit">Tukar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL CHECK-IN ===== -->
+<div class="overlay" id="checkinOverlay">
+  <div class="modal modal-sm">
+    <button class="close" onclick="closeCheckin()">×</button>
+    <h2 id="ciTitle">🎁 Check In</h2>
+    <p class="sub" id="ciSub">Klaim 5 coin gratis setiap 3 jam.</p>
+    <div class="checkin-visual">
+      <div class="ci-big" id="ciBig">🎁</div>
+      <div class="ci-msg" id="ciMsg">Tekan tombol di bawah untuk klaim.</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="closeCheckin()">Tutup</button>
+      <button class="btn btn-primary" id="ciClaim">Klaim 5 Coin</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL EDIT PROFIL ===== -->
+<div class="overlay hidden" id="editProfileOverlay">
+  <div class="modal">
+    <div class="modal-head"><h2>Edit Profil</h2><button class="close-btn" id="closeEditProfile">✕</button></div>
+    <div style="text-align:center;margin:8px 0;">
+      <div class="pf-ring" style="width:96px;height:96px;margin:0 auto;padding:3px;">
+        <div class="in" id="editAvatarPreview">F</div>
+      </div>
+    </div>
+    <label class="cam-badge" for="editPhotoInput" style="display:inline-flex;cursor:pointer;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line-soft);margin:0 auto 12px;justify-content:center;">📷 Ganti Foto</label>
+    <input type="file" accept="image/*" id="editPhotoInput" style="display:none;">
+    <div class="field"><label>Nama</label><input type="text" id="editNameInput" placeholder="Nama kamu" maxlength="20"></div>
+    <button class="btn btn-primary" id="editSaveBtn" style="width:100%;margin-top:16px;">Simpan</button>
+  </div>
+</div>
+
+<!-- ===== HUB (GAME SHOWCASE) ===== -->
+<div id="hub">
+  <main>
+    <div class="game-showcase" id="gameShowcase" data-mode="slide">
+      <div class="gs-head">
+        <div class="gs-modes" id="gsModes">
+          <button type="button" class="gs-mode active" data-mode="slide">Geser</button>
+          <button type="button" class="gs-mode" data-mode="stack">Tumpuk</button>
+          <button type="button" class="gs-mode" data-mode="list">List</button>
+          <button type="button" class="gs-mode" data-mode="grid">Grid</button>
+        </div>
+        <div class="gs-nav" id="gsNav">
+          <button type="button" class="gs-arrow" id="gsPrev">❮</button>
+          <span class="gs-count" id="gsCount">1 / 24</span>
+          <button type="button" class="gs-arrow" id="gsNext">❯</button>
+        </div>
+      </div>
+      <div class="gs-dots" id="gsDots"></div>
+      <div class="grid" id="gameGrid"></div>
+    </div>
+    <div class="coming">Game lain nyusul di sini …</div>
+  </main>
+  <footer>FebzTzy — All Tools & Game</footer>
+</div>
+
+<!-- ===== TAB TOOLS ===== -->
+<div id="tabTools" class="tab-view">
+  <div class="titlebar"><h1>Tools</h1><div class="tag">Premium toolkit · generate · enhance · utilitas</div></div>
+  <main>
+    <div class="tool-grid" id="toolGrid"></div>
+  </main>
+</div>
+
+<!-- ===== TAB PROFIL ===== -->
+<div id="tabProfile" class="tab-view">
+  <div class="titlebar"><h1>Profil</h1><div class="tag">Statistik lengkap</div></div>
+  <main id="pfBody"></main>
+</div>
+
+<!-- ===== TAB DEV ===== -->
+<div id="tabDev" class="tab-view">
+  <div class="titlebar"><h1>Dev</h1><div class="tag">Di balik layar FebzTzy</div></div>
+  <main>
+    <div class="dev-hero">
+      <div class="dev-logo">F</div>
+      <div class="dev-title">FebzTzy Developer</div>
+      <div class="dev-role" id="devRole">Web Developer</div>
+      <p class="dev-bio">Membangun game dan tools web dari nol dengan HTML, CSS, dan JavaScript murni.</p>
+      <div class="dev-stats">
+        <div><b id="devGames">0</b><span>GAME</span></div>
+        <div><b id="devLevels">0</b><span>LEVEL</span></div>
+        <div><b>0</b><span>FRAMEWORK</span></div>
+      </div>
+    </div>
+    <div class="sec-title">Teknologi</div>
+    <div class="dev-card"><div class="dev-chips">
+      <span class="dev-chip">HTML5 Canvas</span><span class="dev-chip">CSS3</span>
+      <span class="dev-chip">JavaScript</span><span class="dev-chip">Web Audio API</span>
+      <span class="dev-chip">localStorage</span>
+    </div></div>
+    <div class="dev-foot">© FebzTzy — All Tools & Game</div>
+  </main>
+</div>
+
+<!-- ===== TAB KOMIK ===== -->
+<div id="tabKomik" class="tab-view">
+  <div class="titlebar"><h1>Komik</h1><div class="tag">Baca komik online</div></div>
+  <main>
+    <div class="kmk-search">
+      <input id="kmkInput" type="search" placeholder="Cari judul komik…" enterkeyhint="search" autocomplete="off">
+      <button class="kmk-clear" id="kmkClear">×</button>
+    </div>
+    <div class="kmk-chips" id="kmkChips"></div>
+    <div class="kmk-heading" id="kmkHeading">Beranda</div>
+    <div class="kmk-grid" id="kmkGrid"></div>
+    <div class="kmk-status" id="kmkStatus"></div>
+    <button class="play-btn" id="kmkMore" style="display:none;width:100%;">Muat lebih banyak</button>
+  </main>
+</div>
+
+<!-- ===== GAME APPS ===== -->
+
+<!-- Snake Neon -->
+<div id="snakeApp">
+  <main>
+    <div id="snakeStart">
+      <div class="hud"><button class="hud-btn" id="toHubBtn2" type="button">← Hub</button><div class="progress-line">Skor tertinggi: <span id="snakeHigh">0</span></div></div>
+      <div class="hero"><svg viewBox="0 0 400 130"><rect width="400" height="130" fill="#180e2a"/><path d="M30 100 L30 65 L110 65 L110 40 L200 40 L200 75 L290 75" fill="none" stroke="#8b3ffb" stroke-width="20" stroke-linecap="round"/><circle cx="290" cy="75" r="13" fill="#fff"/></svg></div>
+      <div class="legend"><span><i style="background:#60d4ff;"></i>Normal +1</span><span><i style="background:#ffce54;"></i>Gem +3</span><span><i style="background:#ff3ec8;"></i>Kristal +5</span><span><i style="background:#4ade80;"></i>Petir: cepat</span><span><i style="background:#8b3ffb;"></i>Jam: lambat</span></div>
+      <div class="hint">Nabrak dinding atau badan sendiri = kalah. Swipe / panah untuk gerak.</div>
+      <button class="play-btn" id="snakePlayBtn" style="width:100%;margin-top:12px;">▶︎ Mulai Main</button>
+    </div>
+    <div id="snakeGame">
+      <div class="score-row"><button class="hud-btn" id="snakeBackBtn">← Menu</button><div>Skor: <span id="snakeScore">0</span> | Tertinggi: <span id="snakeHigh2">0</span></div></div>
+      <div class="stage">
+        <canvas id="snakeCanvas" width="300" height="300"></canvas>
+        <div class="overlay" id="snakeOverOverlay">
+          <h2 style="color:var(--red);">Game Over</h2>
+          <p>Skor: <span id="snakeFinalScore">0</span> | Tertinggi: <span id="snakeHighScore2">0</span></p>
+          <div class="row"><button class="ov-btn" id="snakeRetryBtn">Main Lagi</button><button class="ov-btn secondary" id="snakeMenuBtn">Menu</button></div>
+        </div>
+      </div>
+      <div class="dpad"><button class="up" id="dUp">▲</button><button class="left" id="dLeft">◀</button><button class="down" id="dDown">▼</button><button class="right" id="dRight">▶</button></div>
+    </div>
+  </main>
+</div>
+
+<!-- Block Blast -->
+<div id="blockApp">
+  <main>
+    <div id="blockStart">
+      <div class="hud"><button class="hud-btn" id="toHubBtn3">← Hub</button><div class="progress-line">Skor tertinggi: <span id="bbHigh">0</span></div></div>
+      <div class="hero"><svg viewBox="0 0 400 130"><rect width="400" height="130" fill="#180e2a"/><rect x="41" y="67" width="36" height="28" rx="4" fill="#ff3ec8"/><rect x="161" y="35" width="36" height="28" rx="4" fill="#60d4ff"/><rect x="241" y="67" width="36" height="28" rx="4" fill="#ffce54"/></svg></div>
+      <div class="hint">Geser balok di bawah ke grid. Penuhi baris/kolom biar meledak.</div>
+      <button class="play-btn" id="blockPlayBtn" style="width:100%;margin-top:10px;">▶︎ Mulai Main</button>
+    </div>
+    <div id="blockGame" style="display:none;">
+      <div class="score-row"><button class="hud-btn" id="blockBackBtn">← Menu</button><div>Skor: <span id="bbScore">0</span> | Tertinggi: <span id="bbHigh2">0</span></div></div>
+      <div class="stage">
+        <div class="bb-grid" id="bbGrid"></div>
+        <div class="overlay" id="bbOverOverlay">
+          <h2 style="color:var(--red);">Grid Penuh!</h2>
+          <p>Skor: <span id="bbFinalScore">0</span> | Tertinggi: <span id="bbHighScore2">0</span></p>
+          <div class="row"><button class="ov-btn" id="bbRetryBtn">Main Lagi</button><button class="ov-btn secondary" id="bbMenuBtn">Menu</button></div>
+        </div>
+      </div>
+      <div class="bb-tray" id="bbTray"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Geometry Dash -->
+<div id="gameApp">
+  <main>
+    <div id="levelSelect">
+      <div class="hud"><button class="hud-btn" id="toHubBtn">← Hub</button><div class="progress-line" id="progLine">Level terbuka: 1 / 40</div></div>
+      <div class="hero"><svg viewBox="0 0 400 130"><rect width="400" height="130" fill="#2a1440"/><polygon points="30,100 42,74 54,100" fill="#ffce54"/><rect x="140" y="68" width="30" height="32" fill="#8b3ffb"/><g transform="translate(190,58)"><rect x="-15" y="-15" width="30" height="30" rx="4" fill="#ff3ec8"/></g></svg></div>
+      <div class="lvl-grid" id="lvlGrid"></div>
+    </div>
+    <div id="gameScreen">
+      <div class="hud"><button class="hud-btn" id="backBtn">← Level</button><div class="lvl-label" id="lvlLabel">Level 1</div><button class="hud-btn" id="restartBtn">↻ Ulang</button></div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="stage">
+        <canvas id="canvas" width="320" height="380"></canvas>
+        <div class="overlay" id="loseOverlay">
+          <h2 style="color:var(--red);">Nabrak!</h2><p>Coba lagi.</p>
+          <div class="row"><button class="ov-btn" id="retryBtn">Coba Lagi</button><button class="ov-btn secondary" id="loseBackBtn">Level Lain</button></div>
+        </div>
+        <div class="overlay" id="winOverlay">
+          <h2 style="color:var(--gold);">Level Selesai!</h2><p id="winText">Level berikutnya terbuka.</p>
+          <div class="row"><button class="ov-btn" id="nextBtn">Level Selanjutnya</button><button class="ov-btn secondary" id="winBackBtn">Level Lain</button></div>
+        </div>
+      </div>
+      <div class="hint">Ketuk canvas / spasi untuk lompat</div>
+    </div>
+  </main>
+</div>
+
+<!-- Snake Arena -->
+<div id="sioApp">
+  <main>
+    <div id="sioStart">
+      <div class="hud"><button class="hud-btn" id="toHubBtn6">← Hub</button><div class="progress-line">Skor tertinggi: <span id="sioHigh">0</span></div></div>
+      <div class="hero"><svg viewBox="0 0 400 130"><rect width="400" height="130" fill="#180e2a"/><path d="M40 90 Q80 30 140 60 T260 40 T350 75" fill="none" stroke="#4ade80" stroke-width="16" stroke-linecap="round"/></svg></div>
+      <div class="hint">Geser di canvas untuk belokin ular. Boost ada di kanan bawah.</div>
+      <button class="play-btn" id="sioPlayBtn" style="width:100%;margin-top:10px;">▶︎ Mulai Main</button>
+    </div>
+    <div id="sioGame" style="display:none;">
+      <div class="score-row"><button class="hud-btn" id="sioBackBtn">← Menu</button><div>Skor: <span id="sioScore">0</span> | Tertinggi: <span id="sioHigh2">0</span></div></div>
+      <div class="stage">
+        <canvas id="sioCanvas" width="340" height="340"></canvas>
+        <div class="sio-leaderboard" id="sioLeaderboard"></div>
+        <div class="overlay" id="sioOverOverlay">
+          <h2 style="color:var(--red);">Game Over</h2>
+          <p>Skor: <span id="sioFinalScore">0</span> | Tertinggi: <span id="sioHighScore2">0</span></p>
+          <div class="row"><button class="ov-btn" id="sioRetryBtn">Main Lagi</button><button class="ov-btn secondary" id="sioMenuBtn">Menu</button></div>
+        </div>
+      </div>
+      <div class="sio-controls">
+        <div class="sio-joyzone" id="sioJoyzone"><div class="sio-joybase"><div class="sio-joynub" id="sioJoyNub"></div></div><div class="sio-joyhint">Geser di sini</div></div>
+        <div class="sio-boostwrap">
+          <div class="sio-energy"><div class="sio-energy-fill" id="sioEnergyFill"></div></div>
+          <button class="sio-boostbtn" id="sioBoostBtn">⚡<small>Boost</small></button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== AI PAGE ===== -->
+<div id="aiPage" class="ai-page" aria-hidden="true">
+  <div class="ai-bg"></div>
+  <div class="ai-head">
+    <button type="button" class="ai-ico" id="aiBack" aria-label="Kembali">←</button>
+    <div class="ai-av"><img id="aiHeadImg" alt="" referrerpolicy="no-referrer"></div>
+    <div class="ai-tt"><b id="aiCharTitle">AI FebzTzy</b><span><i></i><span id="aiModelLabel">Note GPT</span> · online</span></div>
+    <button type="button" class="ai-ico" id="aiHist" aria-label="Riwayat">🕘</button>
+    <button type="button" class="ai-ico" id="aiNew" aria-label="Obrolan baru">+</button>
+  </div>
+  <div class="ai-models" id="aiModels"></div>
+  <div class="ai-body">
+    <div class="ai-msgs" id="aiMsgs"></div>
+    <div class="ai-char-fixed" id="aiCharStage"><img id="aiCharImg" alt=""></div>
+  </div>
+  <button type="button" class="ai-down" id="aiDown" aria-label="Ke pesan terbaru">↓</button>
+  <div class="ai-comp">
+    <div class="ai-prev" id="aiPrev"><img id="aiPrevImg" alt=""><button type="button" id="aiPrevX">×</button></div>
+    <div class="ai-box">
+      <input type="file" id="aiFile" accept="image/*" style="display:none;">
+      <button type="button" class="ai-att" id="aiAtt" aria-label="Kirim foto">📷</button>
+      <textarea id="aiIn" rows="1" maxlength="600" placeholder="Mau nanya apa?"></textarea>
+      <button type="button" class="ai-send" id="aiSend" aria-label="Kirim">→</button>
+    </div>
+    <div class="ai-note">AI bisa salah, cek lagi info penting.</div>
+  </div>
+  <div class="ai-scrim" id="aiScrim"></div>
+  <div class="ai-drawer" id="aiDrawer">
+    <div class="ai-dh"><b>Riwayat obrolan</b><button type="button" class="ai-ico" id="aiDClose">×</button></div>
+    <button type="button" class="ai-newbig" id="aiNew2">+ Obrolan baru</button>
+    <div class="ai-dl" id="aiList"></div>
+    <button type="button" class="ai-wipe" id="aiWipe">Hapus semua</button>
+  </div>
+</div>
+
+<!-- ===== SPOTIFY PANEL (di kartu profil) ===== -->
+<div id="spPanel" style="display:none;">
+  <button type="button" class="sp-back" id="spBackBtn">← Balik ke Profile</button>
+  <div class="sp-search-wrap">
+    <input id="spSearchInput" type="search" placeholder="Cari lagu, artis..." autocomplete="off">
+    <button type="button" id="spSearchBtn" class="sp-search-btn">Cari</button>
+  </div>
+  <div id="spSearchSt" class="sp-search-st"></div>
+  <div id="spSearchList" class="sp-search-list"></div>
+  <div class="sp-now" id="spNowBox">
+    <div class="sp-now-top">
+      <div class="sp-disc" id="spDisc"><img id="spDiscImg" alt=""><span class="sp-disc-ic">♪</span></div>
+      <button type="button" class="sp-lyr-side" id="spLyrSide"><span id="spLyrSideIco">🎤</span><span id="spLyrSideLab">Lirik</span></button>
+    </div>
+    <div class="sp-meta">
+      <div class="sp-title" id="spTitle">Spotify FebzTzy</div>
+      <div class="sp-sub" id="spSub">Cari atau pilih lagu</div>
+    </div>
+    <div class="sp-lyr-inline" id="spLyrInline"></div>
+  </div>
+  <div class="sp-seek-wrap">
+    <div class="sp-bar" id="spBar"><i id="spBarFill"></i><span class="sp-knob" id="spKnob"></span></div>
+    <div class="sp-times"><span id="spTimeCur">0:00</span><span id="spTimeDur">0:00</span></div>
+  </div>
+  <div class="sp-ctrl">
+    <button id="spPrev" type="button">⏮</button>
+    <button class="sp-play" id="spPlay" type="button">▶</button>
+    <button id="spNext" type="button">⏭</button>
+  </div>
+  <iframe id="spEmbed" allow="autoplay; encrypted-media" style="display:none;width:100%;height:200px;border:0;border-radius:12px;margin-bottom:10px;" src="about:blank"></iframe>
+  <div class="sp-section-label"><span>Playlist kamu</span><button type="button" class="sp-pl-manage" id="spPlManage">Kelola</button></div>
+  <div class="sp-pl-bar" id="spPlBar"></div>
+  <div class="sp-list" id="spList"></div>
+</div>
+
+<!-- ===== MUSIK ISLAND ===== -->
+<div id="musicIsland" style="display:none;position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;padding-top:env(safe-area-inset-top,0);pointer-events:none;">
+  <div class="music-pill" id="islandPill">
+    <div class="music-art" id="islandArt">♪</div>
+    <div class="music-pill-info">
+      <div class="music-pill-title" id="islandTitle">Pilih musik</div>
+      <div class="music-pill-sub" id="islandGenre">-</div>
+    </div>
+    <div class="music-pill-ctrl">
+      <button id="islandPlayPause" type="button">▶</button>
+      <button id="islandNext" type="button">⏭</button>
+    </div>
+  </div>
+</div>
+<audio id="musicAudio" preload="none" style="display:none;"></audio>
+
+<!-- ===== MUSIC MODAL ===== -->
+<div class="overlay hidden" id="musicModal">
+  <div class="modal" style="max-width:420px;max-height:85vh;overflow-y:auto;">
+    <div class="modal-head"><h2>🎵 Musik</h2><button class="close-btn" id="musicCloseBtn">✕</button></div>
+    <div style="display:flex;gap:8px;margin-bottom:10px;">
+      <input id="musicLinkInput" type="url" placeholder="Tempel link YouTube / Spotify / TikTok..." style="flex:1;padding:10px;border-radius:10px;border:1px solid var(--line-soft);background:var(--card);color:var(--text);font-family:inherit;font-size:13px;">
+      <button type="button" id="musicAddLinkBtn" class="hud-btn">Tambah</button>
+    </div>
+    <div class="sp-search-wrap" style="margin-bottom:10px;">
+      <input id="musicSearchInput" type="search" placeholder="Cari judul, artis..." autocomplete="off">
+      <button type="button" id="musicSearchBtn" class="sp-search-btn">Cari</button>
+    </div>
+    <div class="kmk-chips" id="musicGenreChips"></div>
+    <div class="music-list" id="musicList"></div>
+  </div>
+</div>
+
+<!-- ===== CLI ===== -->
+<div id="cliApp" aria-hidden="true">
+  <div class="cli-bar"><div class="cli-title">febztzy@web:~ — CLI</div><button type="button" class="cli-x" id="cliCloseBtn">Tutup</button></div>
+  <div class="cli-out" id="cliOut"></div>
+  <div class="cli-in-row"><span class="cli-prompt" id="cliPrompt">febz:~$</span><input id="cliInput" type="text" autocomplete="off" placeholder="ketik help"></div>
+</div>
+
+<!-- ===== LATENCY ===== -->
+<div id="latPage" aria-hidden="true"></div>
+
+<!-- ===== KOMIK READER ===== -->
+<div class="kmk-reader" id="kmkReader" aria-hidden="true">
+  <div class="kmk-reader-bar">
+    <button type="button" class="hud-btn" id="kmkReadBack">←</button>
+    <div class="kmk-reader-title" id="kmkReadTitle">Chapter</div>
+    <button type="button" class="hud-btn" id="kmkReadNext">Ch+</button>
+  </div>
+  <div class="kmk-reader-pages" id="kmkReadPages"></div>
+  <div class="kmk-reader-foot">
+    <button type="button" class="hud-btn" id="kmkReadPrev2">← Prev</button>
+    <button type="button" class="hud-btn" id="kmkReadClose">Tutup</button>
+    <button type="button" class="hud-btn" id="kmkReadNext2">Next →</button>
+  </div>
+</div>
+
+<!-- ===== KOMIK MODAL ===== -->
+<div class="overlay hidden" id="kmkModal">
+  <div class="modal" id="kmkModalBox" style="max-width:440px;max-height:92vh;overflow-y:auto;padding:0;">
+    <div id="kmkModalBody"></div>
+  </div>
+</div>
+
+<!-- ===== NAV BAWAH ===== -->
+<nav class="bottom-nav" id="bottomNav" style="display:none;">
+  <div class="nav-inner">
+    <button class="nav-item active" data-tab="game" aria-label="Game">
+      <svg viewBox="0 0 24 24"><rect x="2" y="6.5" width="20" height="12" rx="4"/><path d="M7 10.5v4M5 12.5h4"/><circle cx="15.5" cy="11.5" r=".7"/><circle cx="18" cy="13.8" r=".7"/></svg>
+      <span>Game</span>
+    </button>
+    <button class="nav-item" data-tab="komik" aria-label="Komik">
+      <svg viewBox="0 0 24 24"><path d="M12 6c-1.5-1.3-3.5-2-6-2H3v14h3c2.5 0 4.5.7 6 2 1.5-1.3 3.5-2 6-2h3V4h-3c-2.5 0-4.5.7-6 2z"/><path d="M12 6v14"/></svg>
+      <span>Komik</span>
+    </button>
+    <div class="nav-center">
+      <button class="nav-profile" id="navProfile" aria-label="Profil" style="--xp:0;">
+        <span class="nav-avatar" id="navAvatar" data-key="t:F">F</span>
+        <span class="nav-lv" id="navLv">Lv 1</span>
+      </button>
+    </div>
+    <button class="nav-item" data-tab="dev" aria-label="Dev">
+      <svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>
+      <span>Dev</span>
+    </button>
+    <button class="nav-item" data-tab="tools" aria-label="Tools">
+      <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3.5 17.2a1.8 1.8 0 0 0 2.5 2.5l5.8-5.8a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.3-.5-.5-2.3z"/></svg>
+      <span>Tools</span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-toast" id="navToast"></div>
+
+<!-- ===== FABs ===== -->
+<button type="button" class="cli-fab" id="cliFab" title="CLI" style="position:fixed;top:56px;left:12px;z-index:520;width:42px;height:42px;border-radius:14px;border:1px solid rgba(74,222,128,.35);background:rgba(12,8,22,.75);color:#4ade80;display:none;align-items:center;justify-content:center;cursor:pointer;">⌨</button>
+<button type="button" class="lat-fab" id="latFab" title="Latency" style="position:fixed;top:104px;left:12px;z-index:520;width:42px;height:42px;border-radius:14px;border:1px solid rgba(34,211,238,.35);background:rgba(12,8,22,.75);color:#22d3ee;display:none;align-items:center;justify-content:center;cursor:pointer;">📡</button>
+<button type="button" class="menu-fab" id="menuFab" title="Menu" style="position:fixed;top:8px;left:12px;z-index:520;width:42px;height:42px;border-radius:14px;border:1px solid rgba(255,255,255,.22);background:rgba(12,8,22,.75);color:#fff;display:none;align-items:center;justify-content:center;cursor:pointer;">☰</button>
+<div class="menu-panel" id="menuPanel"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
